@@ -163,8 +163,8 @@
           </group>
         </if>
         <else-if type="book" match="any">
-          <group delimiter=". " prefix=", ">
-            <text macro="edition"/>
+          <text macro="edition" prefix=", "/>
+          <group delimiter=". " prefix=". ">
             <text macro="collection"/>
             <group delimiter=", ">
               <text macro="publisher"/>

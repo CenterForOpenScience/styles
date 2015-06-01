@@ -8,7 +8,7 @@
     <link href="http://journal.publications.chestnet.org/ss/forauthors.aspx#References" rel="documentation"/>
     <contributor>
       <name>Charles Parnot</name>
-      <email>charles@mekentosj.com</email>
+      <email>charles.parnot@gmail.com</email>
     </contributor>
     <contributor>
       <name>Nejat Altintas</name>
@@ -71,7 +71,7 @@
     <choose>
       <if type="article-journal article-magazine" match="any">
         <group suffix=" ">
-          <text variable="container-title" form="short" strip-periods="true"/>
+          <text variable="container-title" form="short" strip-periods="true" font-style="italic"/>
           <choose>
             <if variable="URL">
               <text term="internet" prefix=" [" suffix="]" text-case="capitalize-first"/>
