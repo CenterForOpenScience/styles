@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
-    <title>SAGE Vancouver</title>
+    <title>SAGE - Vancouver</title>
     <id>http://www.zotero.org/styles/sage-vancouver</id>
     <link href="http://www.zotero.org/styles/sage-vancouver" rel="self"/>
     <link href="http://www.uk.sagepub.com/repository/binaries/pdf/SAGE_Vancouver_reference_style.pdf" rel="documentation"/>
@@ -19,7 +19,7 @@
     <category citation-format="numeric"/>
     <category field="medicine"/>
     <summary>Vancouver superscript style modified to italicize journal names strip periods for use in SAGE journals</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <updated>2016-04-07T22:06:38+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
@@ -40,10 +40,10 @@
   <macro name="date">
     <choose>
       <if type="article-newspaper report" match="any">
-	<date variable="issued" form="text"/>
+        <date variable="issued" form="text"/>
       </if>
       <else>
-	<date variable="issued" form="text" date-parts="year"/>
+        <date variable="issued" form="text" date-parts="year"/>
       </else>
     </choose>
   </macro>
@@ -63,16 +63,30 @@
       </group>
       <choose>
         <if variable="URL" match="none">
-	  <text macro="date"/>      
-	</if>
+          <text macro="date"/>
+        </if>
       </choose>
     </group>
   </macro>
   <macro name="access">
-    <group delimiter=" ">
-      <text variable="URL"/>
-      <text macro="accessed-date"/>
-    </group>
+    <choose>
+      <if variable="page" match="none">
+        <choose>
+          <if variable="DOI" match="any">
+            <group prefix=". " delimiter=". ">
+              <date variable="issued" form="text" prefix="Epub ahead of print "/>
+              <text variable="DOI" prefix="DOI: "/>
+            </group>
+          </if>
+          <else>
+            <group delimiter=" ">
+              <text variable="URL"/>
+              <text macro="accessed-date"/>
+            </group>
+          </else>
+        </choose>
+      </if>
+    </choose>
   </macro>
   <macro name="accessed-date">
     <choose>
@@ -90,16 +104,16 @@
   <macro name="container-title">
     <choose>
       <if type="article-journal" match="any">
-        <text variable="container-title" form="short" strip-periods="true"  font-style="italic"/>
+        <text variable="container-title" form="short" strip-periods="true" font-style="italic"/>
       </if>
       <else>
-        <text variable="container-title"   font-style="italic"/>
+        <text variable="container-title" font-style="italic"/>
       </else>
     </choose>
   </macro>
   <macro name="title">
     <choose>
-      <if type="book patent report thesis" match="any"> 
+      <if type="book patent report thesis" match="any">
         <text variable="title" font-style="italic"/>
       </if>
       <else>
@@ -141,7 +155,7 @@
       <text macro="title"/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture patent report song thesis" match="any">
-          <group  delimiter=". " prefix=". ">
+          <group delimiter=". " prefix=". ">
             <text macro="edition"/>
             <text macro="publisher"/>
           </group>
@@ -156,24 +170,24 @@
               </group>
               <text macro="publisher"/>
             </group>
-	    <text macro="page"/>
+            <text macro="page"/>
           </group>
         </else-if>
-	<else-if type="article-newspaper article-magazine" match="any">
-	  <group delimiter=", " prefix=". ">
-	    <text macro="container-title"/>
-	    <text macro="date"/>
-	    <text macro="page"/>
-	  </group>
-	</else-if>
+        <else-if type="article-newspaper article-magazine" match="any">
+          <group delimiter=", " prefix=". ">
+            <text macro="container-title"/>
+            <text macro="date"/>
+            <text macro="page"/>
+          </group>
+        </else-if>
         <else>
           <group delimiter="; " prefix=". ">
             <group delimiter=" ">
               <text macro="container-title"/>
               <choose>
-                <if variable="URL" match="none">
-		  <text macro="date"/>          
-		</if>
+                <if variable="page" match="any">
+                  <text macro="date"/>
+                </if>
               </choose>
             </group>
             <group delimiter=": ">
@@ -183,7 +197,7 @@
           </group>
         </else>
       </choose>
-      <text macro="access" prefix=", "/>
+      <text macro="access"/>
     </layout>
   </bibliography>
 </style>

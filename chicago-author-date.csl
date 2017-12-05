@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" page-range-format="chicago">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="display-and-sort" page-range-format="chicago">
   <info>
     <title>Chicago Manual of Style 16th edition (author-date)</title>
     <id>http://www.zotero.org/styles/chicago-author-date</id>
@@ -24,7 +24,7 @@
     <category citation-format="author-date"/>
     <category field="generic-base"/>
     <summary>The author-date variant of the Chicago style</summary>
-    <updated>2015-04-06T20:30:00+00:00</updated>
+    <updated>2017-03-26T07:38:25+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -116,6 +116,7 @@
         <substitute>
           <names variable="editor"/>
           <names variable="translator"/>
+          <names variable="director"/>
           <text macro="substitute-title"/>
           <text macro="title"/>
         </substitute>
@@ -129,6 +130,7 @@
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
+        <names variable="director"/>
         <text macro="substitute-title"/>
         <text macro="title"/>
       </substitute>
@@ -231,7 +233,7 @@
           </else>
         </choose>
       </else-if>
-      <else-if type="legal_case interview" match="any">
+      <else-if type="legal_case interview patent" match="any">
         <text variable="title"/>
       </else-if>
       <else>
@@ -250,7 +252,7 @@
             </group>
           </if>
           <else>
-            <text variable="edition" prefix=". "/>
+            <text variable="edition" text-case="capitalize-first" prefix=". "/>
           </else>
         </choose>
       </if>
@@ -523,6 +525,12 @@
           <text variable="medium" text-case="capitalize-first"/>
         </group>
       </if>
+      <else-if type="patent">
+        <group delimiter=" " prefix=". ">
+          <text variable="authority"/>
+          <text variable="number"/>
+        </group>
+      </else-if>
       <else>
         <text variable="medium" text-case="capitalize-first" prefix=". "/>
       </else>
@@ -560,6 +568,25 @@
       <else-if type="article-newspaper article-magazine personal_communication" match="any">
         <text macro="day-month" prefix=", "/>
       </else-if>
+      <else-if type="patent">
+        <group delimiter=", " prefix=", ">
+          <group delimiter=" ">
+            <!--Needs Localization-->
+            <text value="filed"/>
+            <date variable="submitted" form="text"/>
+          </group>
+          <group delimiter=" ">
+            <choose>
+              <if variable="issued submitted" match="all">
+                <text term="and"/>
+              </if>
+            </choose>
+            <!--Needs Localization-->
+            <text value="issued"/>
+            <date variable="issued" form="text"/>
+          </group>
+        </group>
+      </else-if>
       <else>
         <group prefix=". " delimiter=", ">
           <choose>
@@ -572,7 +599,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <choose>

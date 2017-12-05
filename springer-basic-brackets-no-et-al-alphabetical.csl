@@ -2,7 +2,7 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" default-locale="en-US" version="1.0" demote-non-dropping-particle="sort-only">
   <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Springer Basic (numeric, brackets, no "et al.", alphabetical)</title>
+    <title>Springer - Basic (numeric, brackets, no "et al.", alphabetical)</title>
     <id>http://www.zotero.org/styles/springer-basic-brackets-no-et-al-alphabetical</id>
     <link href="http://www.zotero.org/styles/springer-basic-brackets-no-et-al-alphabetical" rel="self"/>
     <link href="http://www.zotero.org/styles/springer-basic-brackets-no-et-al" rel="template"/>
@@ -25,13 +25,6 @@
         <names variable="editor"/>
         <names variable="translator"/>
       </substitute>
-    </names>
-  </macro>
-  <macro name="editor">
-    <text term="in" text-case="capitalize-first" suffix=": "/>
-    <names variable="editor">
-      <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"/>
-      <label form="short" strip-periods="true" prefix=" (" suffix=")"/>
     </names>
   </macro>
   <macro name="edition">
@@ -94,10 +87,16 @@
         <if variable="page">
           <choose>
             <if type="chapter paper-conference" match="any">
-              <text macro="editor"/>
-              <group prefix=" " delimiter=", " suffix=". ">
-                <text variable="container-title" form="short"/>
-                <text macro="edition"/>
+              <group delimiter=" " suffix=". ">
+                <text term="in" text-case="capitalize-first" suffix=":"/>
+                <names variable="editor">
+                  <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"/>
+                  <label form="short" strip-periods="true" prefix=" (" suffix=")"/>
+                </names>
+                <group delimiter=", ">
+                  <text variable="container-title" form="short"/>
+                  <text macro="edition"/>
+                </group>
               </group>
               <text variable="publisher" suffix=", "/>
               <text variable="publisher-place" suffix=", "/>

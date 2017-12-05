@@ -20,7 +20,7 @@
     <category citation-format="note"/>
     <category field="generic-base"/>
     <summary>MHRA format with full notes and bibliography</summary>
-    <updated>2014-04-16T14:56:42+00:00</updated>
+    <updated>2015-03-02T23:29:34+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -29,6 +29,10 @@
       <term name="editor" form="verb-short">ed. by</term>
       <term name="edition" form="short">edn</term>
       <term name="translator" form="verb-short">trans. by</term>
+      <term name="folio">
+        <single>fol.</single>
+        <multiple>fols</multiple>
+      </term>
     </terms>
   </locale>
   <macro name="author">
@@ -64,7 +68,7 @@
   </macro>
   <macro name="contributors-note">
     <names variable="author">
-      <name and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never"/>
+      <name and="text" sort-separator=", " delimiter=", "/>
       <label form="short" prefix=", "/>
       <substitute>
         <text macro="title-note"/>
@@ -173,7 +177,15 @@
   <macro name="locators-note">
     <choose>
       <if type="article-journal">
-        <text variable="volume"/>
+        <choose>
+          <if variable="volume">
+            <!--testing for volume because issues w/o volume number have different format-->
+            <group delimiter=".">
+              <text variable="volume"/>
+              <text variable="issue"/>
+            </group>
+          </if>
+        </choose>
       </if>
       <else-if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
         <group delimiter=", ">
@@ -241,6 +253,9 @@
           <if is-numeric="volume">
             <number variable="volume" form="roman" font-variant="small-caps"/>
           </if>
+          <else>
+            <text variable="volume" font-variant="small-caps"/>
+          </else>
         </choose>
       </if>
     </choose>
@@ -284,7 +299,7 @@
   </macro>
   <macro name="contributors-short">
     <names variable="author">
-      <name form="short" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never"/>
+      <name form="short" and="text" sort-separator=", " delimiter=", "/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
@@ -383,9 +398,9 @@
   </macro>
   <macro name="archive-note">
     <group delimiter=", ">
-      <text variable="archive_location"/>
-      <text variable="archive"/>
       <text variable="archive-place"/>
+      <text variable="archive"/>
+      <text variable="archive_location"/>
     </group>
   </macro>
   <macro name="access-note">
@@ -398,7 +413,7 @@
     </group>
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" &lt;http://dx.doi.org/" suffix="&gt;"/>
+        <text variable="DOI" prefix=" &lt;https://doi.org/" suffix="&gt;"/>
       </if>
       <else>
         <choose>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" default-locale="en-US" version="1.0" demote-non-dropping-particle="never">
   <info>
-    <title>Springer Basic (author-date)</title>
+    <title>Springer - Basic (author-date)</title>
     <id>http://www.zotero.org/styles/springer-basic-author-date</id>
     <link href="http://www.zotero.org/styles/springer-basic-author-date" rel="self"/>
     <link href="http://www.springer.com/cda/content/document/cda_downloaddocument/instruct-authors-e.pdf" rel="documentation"/>
@@ -48,14 +48,6 @@
       </substitute>
     </names>
   </macro>
-  <macro name="editor">
-    <text term="in" text-case="capitalize-first" suffix=": "/>
-    <names variable="editor">
-      <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"/>
-      <label form="short" strip-periods="true" prefix=" (" suffix=")"/>
-      <et-al term="and others"/>
-    </names>
-  </macro>
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
@@ -92,7 +84,7 @@
       <date-part name="year"/>
     </date>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix" cite-group-delimiter=", ">
     <sort>
       <key variable="issued"/>
       <key macro="author"/>
@@ -121,10 +113,16 @@
              In: Smith J (ed) The rise of modern genomics, 3rd edn.
              Wiley, New York, pp 230-257 -->
         <if type="chapter paper-conference" match="any">
-          <text macro="editor"/>
-          <group prefix=" " delimiter=", " suffix=". ">
-            <text variable="container-title"/>
-            <text macro="edition"/>
+          <group delimiter=" " suffix=". ">
+            <text term="in" text-case="capitalize-first" suffix=":"/>
+            <names variable="editor">
+              <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"/>
+              <label form="short" strip-periods="true" prefix=" (" suffix=")"/>
+            </names>
+            <group delimiter=", ">
+              <text variable="container-title"/>
+              <text macro="edition"/>
+            </group>
           </group>
           <text variable="publisher" suffix=", "/>
           <text variable="publisher-place" suffix=", "/>

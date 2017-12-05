@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
-    <title>SAGE Harvard</title>
+    <title>SAGE - Harvard</title>
     <id>http://www.zotero.org/styles/sage-harvard</id>
     <link href="http://www.zotero.org/styles/sage-harvard" rel="self"/>
     <link href="http://www.zotero.org/styles/the-open-university-harvard" rel="template"/>
@@ -36,6 +36,7 @@
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
+        <text variable="container-title" font-style="italic"/>
         <text macro="title"/>
       </substitute>
     </names>
@@ -50,10 +51,11 @@
   </macro>
   <macro name="author-short">
     <names variable="author">
-      <name form="short" and="text" delimiter=", " delimiter-precedes-last="never" initialize-with=" "/>
+      <name form="short" and="text" delimiter=", " delimiter-precedes-last="never" initialize-with=""/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
+        <text variable="container-title" font-style="italic"/>
         <text macro="title"/>
       </substitute>
     </names>
@@ -61,8 +63,7 @@
   <macro name="access">
     <choose>
       <if variable="URL">
-        <!--             <text term="online" prefix="[" suffix="]"/> -->
-        <text value=" Available from: "/>
+        <text value="Available from: "/>
         <text variable="URL"/>
         <group prefix=" (" delimiter=" " suffix=")">
           <text term="accessed"/>
@@ -124,11 +125,13 @@
   <macro name="pages">
     <choose>
       <if type="chapter paper-conference" match="any">
-        <label variable="page" form="short" suffix=" "/>
-        <text variable="page"/>
+        <group delimiter=" " prefix=", ">
+          <label variable="page" form="short" suffix=" "/>
+          <text variable="page"/>
+        </group>
       </if>
       <else-if type="article-journal">
-        <text variable="page"/>
+        <text variable="page" prefix=": "/>
       </else-if>
     </choose>
   </macro>
@@ -188,12 +191,12 @@
           <text variable="collection-title"/>
           <text variable="genre"/>
           <text macro="publisher"/>
-          <text macro="locator"/>
           <text macro="published-date"/>
-          <text macro="pages"/>
-          <text macro="access"/>
         </group>
+        <text macro="locator"/>
       </group>
+      <text macro="pages"/>
+      <text macro="access" prefix=". "/>
     </layout>
   </bibliography>
 </style>
